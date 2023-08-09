@@ -1,0 +1,14 @@
+{
+  "name": "craftomate",
+  "version": "1.0.0",
+  "description": "Idle factory game",
+  "main": " ",
+  "scripts": {
+    "test": "npx prodbuild serve start"
+  },
+  "author": "Griffin Ferguson",
+  "license": "ISC",
+  "dependencies": {
+    "prodbuild": "^1.7.0"
+  }
+}
