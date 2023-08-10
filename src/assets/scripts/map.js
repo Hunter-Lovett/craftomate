@@ -53,12 +53,4 @@ for (var y = 0; y < 15; y++) {
         gameMap.appendChild(tile);
     }
 }
-gameMap.addEventListener("wheel", (e) => {
-    if (e.deltaY > 0) {
-        console.log("scroll up");
-    }
-    else if (e.deltaY < 0) {
-        console.log("scroll down");
-    }
-});
 //# sourceMappingURL=map.js.map

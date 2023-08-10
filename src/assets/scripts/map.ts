@@ -1,4 +1,6 @@
 const gameMap = document.getElementById("map")!;
+
+// "Home" the map
 var mapPos = {x: 0, y: 0};
 gameMap.style.top = `${mapPos.x}px`;
 gameMap.style.left = `${mapPos.y}px`;
