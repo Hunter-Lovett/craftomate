@@ -1,1 +1,4 @@
 node_modules/
+
+# Automatically added by Prodbuild
+/.prodbuildrc/
