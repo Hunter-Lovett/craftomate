@@ -48,7 +48,7 @@ for (var y = 0; y < 15; y++) {
         tile.classList.add("tile");
         tile.style.top = `${y * 20}vw`;
         tile.style.left = `${x * 20}vw`;
-        tile.innerText = `x:${x} y:${y}`;
+        // tile.innerText = `x:${x} y:${y}`;
         gameMap.appendChild(tile);
     }
 }
