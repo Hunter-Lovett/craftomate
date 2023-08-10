@@ -1,0 +1,19 @@
+#map {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /* top: 50%;
+    left: 50%; */
+    width: 300vw;
+    height: 300vw;
+    background-color: rgb(0, 0, 0);
+    overflow: hidden;
+    /* cursor: default; */
+}
+
+.tile {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    background-color: rgb(110, 110, 110);
+    outline:1px white solid;
+    /* position:absolute; */
+}
