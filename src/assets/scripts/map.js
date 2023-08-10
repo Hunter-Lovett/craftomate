@@ -8,26 +8,57 @@ gameMap.addEventListener("mousedown", (e) => {
     var originalCoords = { x: e.clientX, y: e.clientY };
     document.onmousemove = (emove) => {
         if (originalCoords.x > emove.clientX) {
-            mapPos.x -= (originalCoords.x - emove.clientX);
+            if (mapPos.x > (gameMap.offsetWidth / -2) + document.body.offsetWidth)
+                mapPos.x -= (originalCoords.x - emove.clientX);
+            else
+                mapPos.x = (gameMap.offsetWidth / -2) + document.body.offsetWidth;
             gameMap.style.left = `${mapPos.x}px`;
         }
         else if (originalCoords.x < emove.clientX) {
-            mapPos.x += (emove.clientX - originalCoords.x);
+            if (mapPos.x < gameMap.offsetWidth / 2)
+                mapPos.x += (emove.clientX - originalCoords.x);
+            else
+                mapPos.x = gameMap.offsetWidth / 2;
             gameMap.style.left = `${mapPos.x}px`;
         }
         if (originalCoords.y > emove.clientY) {
-            mapPos.y -= (originalCoords.y - emove.clientY);
+            if (mapPos.y > (gameMap.offsetHeight / -2) + document.body.offsetHeight)
+                mapPos.y -= (originalCoords.y - emove.clientY);
+            else
+                mapPos.y = (gameMap.offsetHeight / -2) + document.body.offsetHeight;
             gameMap.style.top = `${mapPos.y}px`;
         }
         else if (originalCoords.y < emove.clientY) {
-            mapPos.y += (emove.clientY - originalCoords.y);
+            if (mapPos.y < gameMap.offsetHeight / 2)
+                mapPos.y += (emove.clientY - originalCoords.y);
+            else
+                mapPos.y = gameMap.offsetHeight / 2;
             gameMap.style.top = `${mapPos.y}px`;
         }
         originalCoords = { x: emove.clientX, y: emove.clientY };
     };
 });
-gameMap.addEventListener("mouseup", (e) => {
+window.addEventListener("mouseup", (e) => {
     gameMap.style.cursor = "default";
     document.onmousemove = null;
+});
+for (var y = 0; y < 15; y++) {
+    for (var x = 0; x < 15; x++) {
+        var tile = document.createElement("div");
+        tile.setAttribute("id", `tile_${x}-${y}`);
+        tile.classList.add("tile");
+        tile.style.top = `${y * 20}vw`;
+        tile.style.left = `${x * 20}vw`;
+        tile.innerText = `x:${x} y:${y}`;
+        gameMap.appendChild(tile);
+    }
+}
+gameMap.addEventListener("wheel", (e) => {
+    if (e.deltaY > 0) {
+        console.log("scroll up");
+    }
+    else if (e.deltaY < 0) {
+        console.log("scroll down");
+    }
 });
 //# sourceMappingURL=map.js.map
