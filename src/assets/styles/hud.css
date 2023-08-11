@@ -23,7 +23,12 @@
     border-radius: 2vw 2vw 0 0;
 }
 
-#toolbar-container {
+#toolbar .toolbar-container {
+    padding: 0 1.5vw;
+    width: calc(100% - 3vw);
+}
+
+.toolbar-container {
     --toolbar-item-scroll: 0px;
     overflow: hidden;
     display: flex;
@@ -32,16 +37,17 @@
     gap: 2%;
     align-items: center;
     height: 100%;
-    /* width: 100%; */
+    width: 100%;
 }
 
 .toolbar-item {
+    --background: rgb(20,20,20);
     position: relative;
     width: 5%;
-    padding: 1%;
-    height:50%;
-    margin:0;
-    background-color: rgb(20,20,20);
+    padding: 1vh;
+    height: 4vh;
+    margin: 0;
+    background-color: var(--background);
     border-radius: 10px;
     flex-shrink: 0;
     transform: translate(var(--toolbar-item-scroll));
@@ -49,7 +55,34 @@
 }
 .toolbar-item:hover {
     cursor: pointer;
-    background-color: rgb(50,50,50);
+    --background: rgb(50,50,50);
+}
+
+.toggle-active {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 2vh;
+    margin-top: -1vh;
+}
+
+.toggle-active::before, .toggle-active::after {
+    position: absolute;
+    top: 0%;
+    width: 40%;
+    height: 35%;
+    background-color: rgba(0,0,0,0);
+    content: "";
+}
+
+.toggle-active::before {
+    left: -40%;
+    border-top-right-radius: 50px;
+    box-shadow: 15px -5px 0 var(--background);
+}
+.toggle-active::after {
+    right: -40%;
+    border-top-left-radius: 50px;
+    box-shadow: -15px -5px 0 var(--background);
 }
 
 #menu-left {
@@ -58,4 +91,15 @@
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
+}
+
+#build-menu {
+    width:100vw;
+    height:10vh;
+    background-color: rgba(20, 20, 20, 1);
+    position: absolute;
+    bottom:8vh;
+    left:0;
+    z-index:998;
+    display: none;
 }
