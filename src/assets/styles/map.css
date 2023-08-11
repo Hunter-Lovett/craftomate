@@ -12,7 +12,6 @@
     width: var(--tile-size);
     height: var(--tile-size);
     background-color: rgb(110, 110, 110);
-    /* outline:1px white solid; */
     position:absolute;
     background-image: url(../../graphics/tile-base.svg);
     background-size: 100% 100%;

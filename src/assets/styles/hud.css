@@ -11,21 +11,45 @@
     /* box-shadow: 0 -2vh 2vh rgb(0,0,0,0.8); */
 }
 
-#hud-menu div * {
+#menu-left * {
     margin: 0.6em 1.4em;
 }
 
 #toolbar {
-    --shadow-color: rgb(0,0,0);
-    width:100%;
+    padding: 0 2vw;
+    width: calc(100% - 4vw);
     height:100%;
     background-color: black;
-    /* box-shadow: 
-        2vw -1vh 3vw var(--shadow-color), 
-        -2vw -1vh 3vw var(--shadow-color),
-        2vw 1.5vh 3vw var(--shadow-color),
-        -2vw 1.5vh 3vw var(--shadow-color); */
     border-radius: 2vw 2vw 0 0;
+}
+
+#toolbar-container {
+    --toolbar-item-scroll: 0px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 2%;
+    align-items: center;
+    height: 100%;
+    /* width: 100%; */
+}
+
+.toolbar-item {
+    position: relative;
+    width: 5%;
+    padding: 1%;
+    height:50%;
+    margin:0;
+    background-color: rgb(20,20,20);
+    border-radius: 10px;
+    flex-shrink: 0;
+    transform: translate(var(--toolbar-item-scroll));
+    transition: transform 800ms ease-out;
+}
+.toolbar-item:hover {
+    cursor: pointer;
+    background-color: rgb(50,50,50);
 }
 
 #menu-left {
