@@ -5,7 +5,7 @@
     height: 8vh;
     bottom:0;
     left:0;
-    z-index:998;
+    z-index:100;
     display:grid;
     grid-template-columns: 20vw 60vw 20vw;
     /* box-shadow: 0 -2vh 2vh rgb(0,0,0,0.8); */
@@ -100,6 +100,6 @@
     position: absolute;
     bottom:8vh;
     left:0;
-    z-index:998;
+    z-index:100;
     display: none;
 }

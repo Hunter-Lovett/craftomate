@@ -13,6 +13,6 @@
     height: var(--tile-size);
     background-color: rgb(110, 110, 110);
     position:absolute;
-    background-image: url(../../graphics/tile-base.svg);
+    background-image: url(../../graphics/map/tile-grass.svg);
     background-size: 100% 100%;
 }

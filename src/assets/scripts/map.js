@@ -45,6 +45,13 @@ window.addEventListener("mouseup", (e) => {
 var playerCoords;
 const hudCoords = document.getElementById("hud_coordinates");
 var tileSize = gameMap.offsetWidth / 15;
+const cursor = document.getElementById("cursor");
+function translateCoords() {
+    return [
+        (playerCoords.x.tile * tileSize) + (playerCoords.x.grid * (tileSize / 8)),
+        (playerCoords.y.tile * tileSize) + (playerCoords.y.grid * (tileSize / 8))
+    ];
+}
 gameMap.addEventListener("mousemove", (e) => {
     var rect = gameMap.getBoundingClientRect();
     var mouseX = e.clientX - rect.left;
@@ -62,6 +69,9 @@ gameMap.addEventListener("mousemove", (e) => {
         }
     };
     hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
+    var cursorCoords = translateCoords();
+    cursor.style.top = `${cursorCoords[1]}px`;
+    cursor.style.left = `${cursorCoords[0]}px`;
 });
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {

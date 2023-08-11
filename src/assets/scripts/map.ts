@@ -55,6 +55,14 @@ interface Coordinate {
 var playerCoords: Coordinate;
 const hudCoords = document.getElementById("hud_coordinates")!;
 var tileSize = gameMap.offsetWidth / 15;
+const cursor = document.getElementById("cursor")!;
+
+function translateCoords(): Array<number> {
+    return [
+        (playerCoords.x.tile * tileSize) + (playerCoords.x.grid * (tileSize / 8)),
+        (playerCoords.y.tile * tileSize) + (playerCoords.y.grid * (tileSize / 8))
+    ]
+}
 
 gameMap.addEventListener("mousemove", (e) => {
     // Calculate position within the map element
@@ -76,7 +84,10 @@ gameMap.addEventListener("mousemove", (e) => {
         }
     }
     hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
-    
+    // Cursor
+    var cursorCoords = translateCoords();
+    cursor.style.top = `${cursorCoords[1]}px`;
+    cursor.style.left = `${cursorCoords[0]}px`;
 })
 
 // Create a new blank map
@@ -89,6 +100,7 @@ for (var y = 0; y < 15; y++) {
         tile.classList.add("tile");
         tile.style.top = `${y * 20}vw`;
         tile.style.left = `${x * 20}vw`;
+        // tile.style.transform = `rotate(${Math.round(Math.random() * 4) * 90}deg)`
         // tile.innerText = `x:${x} y:${y}`;
         gameMap.appendChild(tile);
     }
