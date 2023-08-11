@@ -14,19 +14,9 @@ html, body {
     background-color:black;
 }
 
-#menu {
-    --shadow-color: rgb(0,0,0);
-    width:60vw;
-    height:8vh;
-    margin: 0 20vw;
-    background-color: black;
-    z-index: 999;
-    position:absolute;
-    bottom: 0;
-    box-shadow: 
-        2vw -1vh 3vw var(--shadow-color), 
-        -2vw -1vh 3vw var(--shadow-color),
-        2vw 1.5vh 3vw var(--shadow-color),
-        -2vw 1.5vh 3vw var(--shadow-color);
-    border-radius: 2vw 2vw 0 0;
+p {
+    color:white;
+    margin:0;
+    font-family: sans-serif;
+    font-size: 1rem;
 }

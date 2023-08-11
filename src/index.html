@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Craftomate Game</title>
-    <link href="./assets/styles/map.css" rel="stylesheet">
     <link href="./assets/styles/style.css" rel="stylesheet">
+    <link href="./assets/styles/map.css" rel="stylesheet">
+    <link href="./assets/styles/hud.css" rel="stylesheet">
 </head>
 <body>
     <div id="map"></div>
-    <div id="menu"></div>
+    <div id="hud-menu">
+        <div id="menu-left">
+            <p id="hud_factory-name">factoryName</p>
+            <p id="hud_coordinates">xCoordinates, yCoordinates</p>
+            <p id="hud_time">gameTime</p>
+        </div>
+        <div id="toolbar"></div>
+        <div id="menu-right"></div>
+    </div>
     <script src="./assets/scripts/map.js"></script>
 </body>
 </html>
