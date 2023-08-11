@@ -42,10 +42,33 @@ window.addEventListener("mouseup", (e) => {
     gameMap.style.cursor = "default";
     document.onmousemove = null;
 });
+var playerCoords;
+const hudCoords = document.getElementById("hud_coordinates");
+var tileSize = gameMap.offsetWidth / 15;
+gameMap.addEventListener("mousemove", (e) => {
+    var rect = gameMap.getBoundingClientRect();
+    var mouseX = e.clientX - rect.left;
+    var mouseY = e.clientY - rect.top;
+    var gridSize = tileSize / 8;
+    var tileX = Math.floor(mouseX / tileSize);
+    var tileY = Math.floor(mouseY / tileSize);
+    playerCoords = {
+        x: {
+            tile: tileX,
+            grid: Math.floor((mouseX - (tileX * tileSize)) / gridSize)
+        }, y: {
+            tile: tileY,
+            grid: Math.floor((mouseY - (tileY * tileSize)) / gridSize)
+        }
+    };
+    hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
+});
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {
         var tile = document.createElement("div");
         tile.setAttribute("id", `tile_${x}-${y}`);
+        tile.dataset.tileX = `${x}`;
+        tile.dataset.tileY = `${y}`;
         tile.classList.add("tile");
         tile.style.top = `${y * 20}vw`;
         tile.style.left = `${x * 20}vw`;

@@ -40,11 +40,52 @@ window.addEventListener("mouseup", (e) => {
     document.onmousemove = null;
 })
 
+// Coordinates
+interface Coordinate {
+    x: {
+        tile: number,
+        grid: number
+    },
+    y: {
+        tile: number,
+        grid: number
+    }
+}
+
+var playerCoords: Coordinate;
+const hudCoords = document.getElementById("hud_coordinates")!;
+var tileSize = gameMap.offsetWidth / 15;
+
+gameMap.addEventListener("mousemove", (e) => {
+    // Calculate position within the map element
+    var rect = gameMap.getBoundingClientRect();
+    var mouseX = e.clientX - rect.left;
+    var mouseY = e.clientY - rect.top;
+    // Calculate which tile the mouse is over
+    var gridSize = tileSize / 8;
+    var tileX = Math.floor(mouseX / tileSize);
+    var tileY = Math.floor(mouseY / tileSize);
+    // Update the coordinates
+    playerCoords = {
+        x: {
+            tile: tileX,
+            grid: Math.floor((mouseX - (tileX * tileSize)) / gridSize)
+        }, y: {
+            tile: tileY,
+            grid: Math.floor((mouseY - (tileY * tileSize)) / gridSize)
+        }
+    }
+    hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
+    
+})
+
 // Create a new blank map
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {
         var tile = document.createElement("div");
         tile.setAttribute("id", `tile_${x}-${y}`);
+        tile.dataset.tileX = `${x}`;
+        tile.dataset.tileY = `${y}`;
         tile.classList.add("tile");
         tile.style.top = `${y * 20}vw`;
         tile.style.left = `${x * 20}vw`;
