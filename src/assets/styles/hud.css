@@ -101,7 +101,7 @@
 
 #build-menu {
     width:100vw;
-    height:10vh;
+    height:12vh;
     background-color: rgb(20, 20, 20);
     position: absolute;
     bottom:8vh;
@@ -116,7 +116,7 @@
     font-family: monospace;
     font-weight: bold;
     font-size:1.5rem;
-    border-radius: 20px 20px 0 0;
+    border-radius: 15px 15px 0 0;
     top: -2rem;
     left: 1vw;
     background-color: rgb(20,20,20);
@@ -132,7 +132,6 @@
     position: absolute;
     top:0.25rem;
     left:1rem;
-    /* background-color: red; */
     content: "";
     background-image: var(--info-icon);
     background-size: 100% 100%;
@@ -140,4 +139,32 @@
 
 #build-menu .toolbar-container {
     display: none;
+    padding: 1vh 1.5vw;
+    height:10vh;
+    width:98vh;
+}
+
+.build-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:8vh;
+    gap:0.4rem;
+    border-radius: 15px;
+    padding:1vh;
+}
+
+.build-menu-item:hover {
+    background-color: rgba(50,50,50,0.8);
+    cursor: pointer;
+}
+
+.build-menu-item p {
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.build-menu-item img {
+    height: calc(8vh - 1.4rem);
+    width: calc(8vh - 1.4rem);
 }

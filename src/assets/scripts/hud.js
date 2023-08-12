@@ -37,7 +37,7 @@ toolbarToggle.forEach((toggle) => {
             });
             menuInfo.innerText = toggle.dataset.menu[0].toUpperCase() + toggle.dataset.menu.slice(1);
             menuInfo.style.setProperty("--info-icon", `url(/graphics/icons/${toggle.dataset.menu}.svg)`);
-            buildList.get(toggle.dataset.menu).style.display = "block";
+            buildList.get(toggle.dataset.menu).style.display = "flex";
             toggle.classList.add("toggle-active");
             buildMenu.style.display = "block";
         }
