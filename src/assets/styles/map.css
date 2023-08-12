@@ -28,6 +28,6 @@
     width: calc(var(--tile-size) / 8);
     height: calc(var(--tile-size) / 8);
     position:absolute;
-    background-color: red;
     z-index: 11;
+    background-size:100% 100%;
 }

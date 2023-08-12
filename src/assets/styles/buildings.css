@@ -1,0 +1,7 @@
+.building[data-type="transport.conveyor_1"][data-power="idle"] {
+    background-image: url(../../graphics/transport/conveyor_1/idle.svg);
+}
+
+.building[data-type="transport.conveyor_1"][data-power="active"] {
+    background-image: url(../../graphics/transport/conveyor_1/active.svg);
+}

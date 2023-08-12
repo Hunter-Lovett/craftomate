@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+    <rect x="0" y="0" width="128" height="128" fill="#242424" />
+    <g>
+        <path stroke="rgb(5,5,5)" stroke-width="1" d="M1 0 l0 128" />
+        <path stroke="rgb(5,5,5)" stroke-width="1" d="M33 0 l0 128" />
+        <path stroke="rgb(5,5,5)" stroke-width="1" d="M65 0 l0 128" />
+        <path stroke="rgb(5,5,5)" stroke-width="1" d="M97 0 l0 128" />
+    </g>
+    <g>
+        <rect x="0" y="0" width="128" height="16" fill="rgb(150,60,40)" />
+        <path stroke="#a17945" stroke-width="1.5" fill="none"
+            d="
+                M0 2 l8 6 l-8 6
+                M32 2 l8 6 l-8 6
+                M64 2 l8 6 l-8 6
+                M96 2 l8 6 l-8 6
+            " />
+        <rect x="0" y="112" width="128" height="16" fill="rgb(150,60,40)" />
+        <path stroke="#a17945" stroke-width="1.5" fill="none"
+            d="
+                M0 114 l8 6 l-8 6
+                M32 114 l8 6 l-8 6
+                M64 114 l8 6 l-8 6
+                M96 114 l8 6 l-8 6
+            " />
+    </g>
+</svg>
