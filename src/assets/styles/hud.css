@@ -103,3 +103,9 @@
     z-index:100;
     display: none;
 }
+
+#build-menu .toolbar-container {
+    display: none;
+}
+
+/* BUILD LISTS */

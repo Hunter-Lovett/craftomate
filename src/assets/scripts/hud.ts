@@ -2,6 +2,10 @@
 const container = Array.from(document.getElementsByClassName("toolbar-container")!) as HTMLElement[];
 const toolbarToggle = Array.from(document.getElementsByClassName("toolbar-toggle")!) as HTMLElement[];
 const buildMenu = document.getElementById("build-menu")!;
+const buildList = new Map([
+    ["transport", document.getElementById("transport")!],
+    ["buildings", document.getElementById("buildings")!],
+])
 
 // Scroll through toolbar items
 var scrollFactor = 0;
@@ -26,6 +30,13 @@ toolbarToggle.forEach((toggle) => {
             toggle.classList.remove("toggle-active");
             buildMenu.style.display = "none";
         } else {
+            toolbarToggle.forEach((elem) => {
+                elem.classList.remove("toggle-active");
+            })
+            buildList.forEach((elem) => {
+                elem.style.display = "none";
+            })
+            buildList.get(toggle.dataset.menu!)!.style.display = "block";
             toggle.classList.add("toggle-active");
             buildMenu.style.display = "block";
         }

@@ -34,5 +34,6 @@ p {
 /* Z-INDEX LEVELS 
  * 1 - #map
  * 10 - #cursor
+ * 11 - .building
  * 100 - #hud-menu #build-menu
  */

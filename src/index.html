@@ -7,6 +7,7 @@
     <link href="./assets/styles/style.css" rel="stylesheet">
     <link href="./assets/styles/map.css" rel="stylesheet">
     <link href="./assets/styles/hud.css" rel="stylesheet">
+    <link href="./assets/styles/buildings.css" rel="stylesheet">
 </head>
 <body>
     <div id="map">
@@ -17,46 +18,22 @@
             <p id="hud_factory-name">factoryName</p>
             <p id="hud_coordinates">xCoordinates, yCoordinates</p>
             <p id="hud_time">gameTime</p>
+            <p id="hud_balance">balance</p>
         </div>
         <div id="toolbar">
             <div class="toolbar-container">
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
-                <div class="toolbar-item toolbar-toggle"></div>
+                <div class="toolbar-item toolbar-toggle" data-menu="transport"></div>
+                <div class="toolbar-item toolbar-toggle" data-menu="buildings"></div>
             </div> 
         </div>
         <div id="menu-right"></div>
     </div>
-    <div id="build-menu"></div>
+    <div id="build-menu">
+        <div id="transport" class="toolbar-container"></div>
+        <div id="buildings" class="toolbar-container"></div>
+    </div>
     <script src="./assets/scripts/map.js"></script>
     <script src="./assets/scripts/hud.js"></script>
+    <script src="./assets/scripts/buildings.js"></script>
 </body>
 </html>

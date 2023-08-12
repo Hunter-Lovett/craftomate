@@ -57,10 +57,15 @@ const hudCoords = document.getElementById("hud_coordinates")!;
 var tileSize = gameMap.offsetWidth / 15;
 const cursor = document.getElementById("cursor")!;
 
-function translateCoords(): Array<number> {
+function translateCoords(coords: Coordinate): Array<Array<number>> {
     return [
-        (playerCoords.x.tile * tileSize) + (playerCoords.x.grid * (tileSize / 8)),
-        (playerCoords.y.tile * tileSize) + (playerCoords.y.grid * (tileSize / 8))
+        [ // X
+            (coords.x.tile * tileSize), // Tile
+            (coords.x.grid * (tileSize / 8)) // Grid
+        ], [ // Y
+            (coords.y.tile * tileSize), // Tile
+            (coords.y.grid * (tileSize / 8)) // Grid
+        ]
     ]
 }
 
@@ -85,23 +90,49 @@ gameMap.addEventListener("mousemove", (e) => {
     }
     hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
     // Cursor
-    var cursorCoords = translateCoords();
-    cursor.style.top = `${cursorCoords[1]}px`;
-    cursor.style.left = `${cursorCoords[0]}px`;
+    var cursorCoords = translateCoords(playerCoords);
+    cursor.style.top = `${cursorCoords[1][0] + cursorCoords[1][1]}px`;
+    cursor.style.left = `${cursorCoords[0][0] + cursorCoords[0][1]}px`;
 })
 
 // Create a new blank map
+const mapData: Map<String, Tile> = new Map();
+class Tile {
+    element: HTMLElement;
+    buildings: Array<Building>;
+    constructor(x: number, y: number, env: String) {
+        // Create element
+        this.element = document.createElement("div");
+        this.element.setAttribute("id", `tile_${x}-${y}`);
+        this.element.classList.add("tile");
+        this.element.style.top = `${y * 20}vw`;
+        this.element.style.left = `${x * 20}vw`;
+        // Load correct textures
+        if(env == "grass") {
+            this.element.classList.add("grass");
+            // this.element.style.transform = `rotate(${Math.round(Math.random() * 4) * 90}deg)`;
+        } else {
+            this.element.classList.add("factory");
+        }
+        // Add to game
+        this.buildings = [];
+        gameMap.appendChild(this.element);
+        this.element = document.getElementById(`tile_${x}-${y}`)!;
+        mapData.set(`tile_${x}-${y}`, this);
+    }
+
+    addBuilding(building: Building) {
+        this.buildings.push(building);
+        var coords = translateCoords(building.position);
+        building.element.style.top = coords[1][1] + "px";
+        building.element.style.left = coords[0][1] + "px";
+        this.element.appendChild(building.element);
+    }
+}
+
+
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {
-        var tile = document.createElement("div");
-        tile.setAttribute("id", `tile_${x}-${y}`);
-        tile.dataset.tileX = `${x}`;
-        tile.dataset.tileY = `${y}`;
-        tile.classList.add("tile");
-        tile.style.top = `${y * 20}vw`;
-        tile.style.left = `${x * 20}vw`;
-        // tile.style.transform = `rotate(${Math.round(Math.random() * 4) * 90}deg)`
-        // tile.innerText = `x:${x} y:${y}`;
-        gameMap.appendChild(tile);
+        new Tile(x, y, "grass");
     }
 }
