@@ -22,14 +22,22 @@
         </div>
         <div id="toolbar">
             <div class="toolbar-container">
-                <div class="toolbar-item toolbar-toggle" data-menu="transport"></div>
-                <div class="toolbar-item toolbar-toggle" data-menu="buildings"></div>
+                <div class="toolbar-item" data-menu="transport">
+                    <img src="./graphics/icons/transport.svg" alt="transport">
+                </div>
+                <div class="toolbar-item" data-menu="buildings"></div>
             </div> 
         </div>
         <div id="menu-right"></div>
     </div>
     <div id="build-menu">
-        <div id="transport" class="toolbar-container"></div>
+        <div id="build-menu-info"></div>
+        <div id="transport" class="toolbar-container">
+            <div class="build-menu-item">
+                <img src="./graphics/transport/conveyor_1/active.svg" alt="Conveyor Belt Mk1">
+                <p>Conveyor Belt</p>
+            </div>
+        </div>
         <div id="buildings" class="toolbar-container"></div>
     </div>
     <script src="./assets/scripts/map.js"></script>
