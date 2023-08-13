@@ -1,6 +1,7 @@
 // const bar = document.getElementById("toolbar")!;
 const container = Array.from(document.getElementsByClassName("toolbar-container")!) as HTMLElement[];
 const toolbarToggle = Array.from(document.getElementsByClassName("toolbar-item")!) as HTMLElement[];
+const buildItems = Array.from(document.getElementsByClassName("build-menu-item")!) as HTMLElement[];
 const buildMenu = document.getElementById("build-menu")!;
 const buildList = new Map([
     ["transport", document.getElementById("transport")!],
@@ -42,6 +43,28 @@ toolbarToggle.forEach((toggle) => {
             buildList.get(toggle.dataset.menu!)!.style.display = "flex";
             toggle.classList.add("toggle-active");
             buildMenu.style.display = "block";
+        }
+    })
+})
+
+// Cursor "Modes"
+const cursorIcon = document.getElementById("cursor-icon")!;
+function cursorIdleMode() {
+    console.log("Cursor clicked, idling");
+}
+
+var cursorMode: Function = cursorIdleMode;
+cursor.addEventListener("click", (e) => {
+    cursorMode();
+})
+
+// Build mode
+buildItems.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        var buildItem = item.dataset.type!.split(".")
+        cursorIcon.setAttribute("src", `/graphics/${buildItem[0]}/${buildItem[1]}/active.svg`);
+        cursorMode = () => {
+            new Building(buildItem[1], buildItem[0], playerCoords)
         }
     })
 })

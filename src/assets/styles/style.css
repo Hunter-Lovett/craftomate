@@ -21,18 +21,9 @@ p {
     font-size: 1rem;
 }
 
-#cursor {
-    background: rgba(200,200,200,0.4);
-    position: absolute;
-    width: 2.5vw;
-    height: 2.5vw;
-    pointer-events: none;
-    z-index: 10;
-    border: 1px solid rgb(200,200,200);
-}
-
 /* Z-INDEX LEVELS 
  * 1 - #map
+ * 9 - #cursor>img
  * 10 - #cursor
  * 11 - .building
  * 100 - #hud-menu #build-menu
