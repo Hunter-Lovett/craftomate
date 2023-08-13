@@ -5,31 +5,45 @@ var mapPos = {x: 0, y: 0};
 gameMap.style.top = `${mapPos.x}px`;
 gameMap.style.left = `${mapPos.y}px`;
 
+const moveMap = {
+    // Drag to the left (map moves right to left)
+    right: function(step: number): void {
+        if (mapPos.x > (gameMap.offsetWidth / -2) + document.body.offsetWidth) mapPos.x -= step; // Ensure left border is not reached
+        else mapPos.x = (gameMap.offsetWidth / -2) + document.body.offsetWidth; // Set to max if border is crossed
+        gameMap.style.left = `${mapPos.x}px`;
+    },
+    // Drag to the right (map moves left to right)
+    left: function(step: number): void {
+            if (mapPos.x < gameMap.offsetWidth / 2) mapPos.x += step; // Ensure right border is not reached
+            else mapPos.x = gameMap.offsetWidth / 2; // Set to max if border is crossed
+            gameMap.style.left = `${mapPos.x}px`;
+    },
+    // Drag down (map moves top to bottom)
+    down: function(step: number): void {
+        if (mapPos.y > (gameMap.offsetHeight / -2) + document.body.offsetHeight) mapPos.y -= step; // Ensure bottom border is not reached
+        else mapPos.y = (gameMap.offsetHeight / -2) + document.body.offsetHeight; // Set to max if border is crossed
+        gameMap.style.top = `${mapPos.y}px`;
+    },
+    // Drag up (map moves bottom to top)
+    up: function(step: number): void {
+        if (mapPos.y < gameMap.offsetHeight / 2) mapPos.y += step; // Ensure top border is not reached
+        else mapPos.y = gameMap.offsetHeight / 2; // Set to max if border is crossed
+        gameMap.style.top = `${mapPos.y}px`;
+    }
+
+}
+
 // Change map position on drag
 gameMap.addEventListener("mousedown", (e) => {
     gameMap.style.cursor = "grabbing";
     var originalCoords = {x: e.clientX, y: e.clientY};
     document.onmousemove = (emove) => {
         // Change x position
-        if (originalCoords.x > emove.clientX) {  // Drag to the left
-            if (mapPos.x > (gameMap.offsetWidth / -2) + document.body.offsetWidth) mapPos.x -= (originalCoords.x - emove.clientX); // Ensure left border is not reached
-            else mapPos.x = (gameMap.offsetWidth / -2) + document.body.offsetWidth; // Set to max if border is crossed
-            gameMap.style.left = `${mapPos.x}px`;
-        } else if (originalCoords.x < emove.clientX) { // Drag to the right
-            if (mapPos.x < gameMap.offsetWidth / 2) mapPos.x += (emove.clientX - originalCoords.x); // Ensure right border is not reached
-            else mapPos.x = gameMap.offsetWidth / 2; // Set to max if border is crossed
-            gameMap.style.left = `${mapPos.x}px`;
-        }
+        if (originalCoords.x > emove.clientX) moveMap.right(originalCoords.x - emove.clientX);
+        else if (originalCoords.x < emove.clientX) moveMap.left(emove.clientX - originalCoords.x);
         // Change y position
-        if (originalCoords.y > emove.clientY) {  // Drag down
-            if (mapPos.y > (gameMap.offsetHeight / -2) + document.body.offsetHeight) mapPos.y -= (originalCoords.y - emove.clientY); // Ensure bottom border is not reached
-            else mapPos.y = (gameMap.offsetHeight / -2) + document.body.offsetHeight; // Set to max if border is crossed
-            gameMap.style.top = `${mapPos.y}px`;
-        } else if (originalCoords.y < emove.clientY) { // Drag up
-            if (mapPos.y < gameMap.offsetHeight / 2) mapPos.y += (emove.clientY - originalCoords.y); // Ensure top border is not reached
-            else mapPos.y = gameMap.offsetHeight / 2; // Set to max if border is crossed
-            gameMap.style.top = `${mapPos.y}px`;
-        }
+        if (originalCoords.y > emove.clientY) moveMap.down(originalCoords.y - emove.clientY);
+        else if (originalCoords.y < emove.clientY) moveMap.up(emove.clientY - originalCoords.y);
         // Update coordinates
         originalCoords = {x: emove.clientX, y: emove.clientY};
     }
@@ -55,7 +69,18 @@ interface Coordinate {
 var playerCoords: Coordinate;
 const hudCoords = document.getElementById("hud_coordinates")!;
 var tileSize = gameMap.offsetWidth / 15;
+var gridSize = tileSize / 8;
 const cursor = document.getElementById("cursor")!;
+
+function updatePlayerCoords(coords: Coordinate) {
+    playerCoords = coords;
+    // Update HUD
+    hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
+    // Cursor
+    var cursorCoords = translateCoords(playerCoords);
+    cursor.style.top = `${cursorCoords[1][0] + cursorCoords[1][1]}px`;
+    cursor.style.left = `${cursorCoords[0][0] + cursorCoords[0][1]}px`;
+}
 
 function translateCoords(coords: Coordinate): Array<Array<number>> {
     return [
@@ -75,11 +100,10 @@ gameMap.addEventListener("mousemove", (e) => {
     var mouseX = e.clientX - rect.left;
     var mouseY = e.clientY - rect.top;
     // Calculate which tile the mouse is over
-    var gridSize = tileSize / 8;
     var tileX = Math.floor(mouseX / tileSize);
     var tileY = Math.floor(mouseY / tileSize);
     // Update the coordinates
-    playerCoords = {
+    updatePlayerCoords({
         x: {
             tile: tileX,
             grid: Math.floor((mouseX - (tileX * tileSize)) / gridSize)
@@ -87,12 +111,7 @@ gameMap.addEventListener("mousemove", (e) => {
             tile: tileY,
             grid: Math.floor((mouseY - (tileY * tileSize)) / gridSize)
         }
-    }
-    hudCoords.innerText = `X: ${playerCoords.x.tile}' ${playerCoords.x.grid}"  Y: ${playerCoords.y.tile}' ${playerCoords.y.grid}"`;
-    // Cursor
-    var cursorCoords = translateCoords(playerCoords);
-    cursor.style.top = `${cursorCoords[1][0] + cursorCoords[1][1]}px`;
-    cursor.style.left = `${cursorCoords[0][0] + cursorCoords[0][1]}px`;
+    })
 })
 
 // Create a new blank map
