@@ -5,7 +5,7 @@ const buildItems = Array.from(document.getElementsByClassName("build-menu-item")
 const buildMenu = document.getElementById("build-menu")!;
 const buildList = new Map([
     ["transport", document.getElementById("transport")!],
-    ["buildings", document.getElementById("buildings")!],
+    ["extraction", document.getElementById("extraction")!],
 ])
 
 // Scroll through toolbar items

@@ -12,7 +12,7 @@
 <body>
     <div id="map">
         <div id="cursor">
-            <img id="cursor-icon" src="" alt="">
+            <img id="cursor-icon" src="" alt="" draggable="false">
         </div>>
     </div>
     <div id="hud-menu">
@@ -27,7 +27,9 @@
                 <div class="toolbar-item" data-menu="transport">
                     <img src="./graphics/icons/transport.svg" alt="Transport">
                 </div>
-                <div class="toolbar-item" data-menu="buildings"></div>
+                <div class="toolbar-item" data-menu="extraction">
+                    <img src="./graphics/icons/extraction.svg" alt="Extraction">
+                </div>
             </div> 
         </div>
         <div id="menu-right"></div>
@@ -37,13 +39,19 @@
         <div id="transport" class="toolbar-container">
             <div class="build-menu-item" data-type="transport.conveyor_1">
                 <img src="./graphics/transport/conveyor_1/active.svg" alt="Conveyor Belt Mk1" draggable="false">
-                <p>Conveyor Belt</p>
+                <p>Conveyor Belt Mk1</p>
             </div>
         </div>
-        <div id="buildings" class="toolbar-container"></div>
+        <div id="extraction" class="toolbar-container">
+            <div class="build-menu-item" data-type="extraction.pitMiner_1">
+                <img src="./graphics/extraction/pitMiner_1/active.svg" alt="Pit Miner Mk1" draggable="false">
+                <p>Pit Miner Mk1</p>
+            </div>
+        </div>
     </div>
     <script src="./assets/scripts/map.js"></script>
     <script src="./assets/scripts/hud.js"></script>
     <script src="./assets/scripts/buildings.js"></script>
+    <script src="./assets/scripts/controls.js"></script>
 </body>
 </html>
