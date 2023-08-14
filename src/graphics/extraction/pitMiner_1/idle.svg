@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="448" height="448" viewBox="0 0 448 448">
+    <symbol width="128" height="128" viewBox="0 0 128 128" id="conveyor_1">
+        <rect x="0" y="0" width="128" height="128" fill="#242424" />
+        <g>
+            <path stroke="rgb(5,5,5)" stroke-width="1" d="M1 0 l0 128" />
+            <path stroke="rgb(5,5,5)" stroke-width="1" d="M33 0 l0 128" />
+            <path stroke="rgb(5,5,5)" stroke-width="1" d="M65 0 l0 128" />
+            <path stroke="rgb(5,5,5)" stroke-width="1" d="M97 0 l0 128" />
+        </g>
+        <g>
+            <rect x="0" y="0" width="128" height="16" fill="rgb(150,60,40)" />
+            <path stroke="#a17945" stroke-width="1.5" fill="none"
+                d="
+                    M0 2 l8 6 l-8 6
+                    M32 2 l8 6 l-8 6
+                    M64 2 l8 6 l-8 6
+                    M96 2 l8 6 l-8 6
+                " />
+            <rect x="0" y="112" width="128" height="16" fill="rgb(150,60,40)" />
+            <path stroke="#a17945" stroke-width="1.5" fill="none"
+                d="
+                    M0 114 l8 6 l-8 6
+                    M32 114 l8 6 l-8 6
+                    M64 114 l8 6 l-8 6
+                    M96 114 l8 6 l-8 6
+                " />
+        </g>
+    </symbol>
+    <circle cx="224" cy="224" r="72" fill="#161616" />
+    <g transform="rotate(90 224 224)">
+        <use href="#conveyor_1" x="224" y="192" width="64" height="64" transform="rotate(180 256 224)" />
+        <use href="#conveyor_1" x="288" y="192" width="64" height="64" transform="rotate(180 320 224)" />
+        <path d="M394 184 l0 80" stroke-width="4" stroke="#636363" fill="none" />
+        <rect x="370" y="208" width="48" height="32" fill="#404040" />
+        <rect x="358" y="214" width="12" height="20" fill="#101010" />
+        <rect x="418" y="214" width="12" height="20" fill="#101010" />
+        <path d="M224 184 l172 0 M224 264 l172 0" stroke-width="4" stroke="#636363" fill="none" />
+        <path d="M225 186 l30 76 l30 -76 l30 76 l30 -76 l30 80" stroke-width="3" stroke="#636363" fill="none" />
+        <path d="M225 264 l30 -76 l30 76 l30 -76 l30 76 l30 -80" stroke-width="3" stroke="#636363" fill="none" />
+    </g>
+    <path fill="#292929" d="M264 192 L224 196 A28 28 180 0 0 224 252 L264 256 Z" />
+    <g>
+        <use href="#conveyor_1" x="264" y="192" width="64" height="64" />
+        <use href="#conveyor_1" x="328" y="192" width="64" height="64" />
+        <use href="#conveyor_1" x="392" y="192" width="64" height="64" />
+    </g>
+</svg>
