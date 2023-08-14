@@ -1,18 +1,18 @@
 const {writeFileSync, rmSync} = require("fs")
-var size = 32
+var size = 64
 var coords = []
-var main = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" viewBox=\"0 0 ${size} ${size}\"><rect x="0" y="0" width=\"${size}\" height=\"${size}\" fill=\"#3ca84b\"/><g>`;
+var mainColor = "#a3854d"
+var main = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" viewBox=\"0 0 ${size} ${size}\"><rect x="0" y="0" width=\"${size}\" height=\"${size}\" fill=\"${mainColor}\"/>`;
 
 var colors = [
-    "#3c723a",
-    "#296326",
-    "#1d7518",
-    "#247720",
-    "#5cb857",
-    "#199137"
+    "#4d3407",
+    "#53462d",
+    "#795f2e",
+    "#3b2c10"
 ]
+main += `\n<!-- colors = [${colors}] -->\n`;
 
-var file = __dirname + "/tile-grass.svg"
+var file = __dirname + "/map/soil.svg";
 
 rmSync(file);
 
@@ -32,6 +32,6 @@ for(var loop = 0; loop < colors.length; loop++) {
     }
     main += "\"/>"
 }
-main += "</g></svg>"
+main += "</svg>"
 
 writeFileSync(file, main, {encoding: "utf8"});
