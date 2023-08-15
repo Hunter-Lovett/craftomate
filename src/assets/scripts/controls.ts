@@ -15,6 +15,7 @@ var keybinds = {
         down: "S",
         left: "A",
         right: "D",
+        exit: "Escape"
     }
 }
 
@@ -22,7 +23,7 @@ var mapStep = tileSize / 7;
 
 window.addEventListener("keydown", (e) => {
     var key = e.key.length == 1 ? e.key.toUpperCase() : e.key;
-    console.log(key, e.key);
+    // console.log(key, e.key);
     switch(key) {
         // Map
         case keybinds.map.right:
@@ -84,5 +85,10 @@ window.addEventListener("keydown", (e) => {
             }
             updatePlayerCoords(currentCoords);
             break;
+        case keybinds.cursor.exit:
+            cursorIcon.setAttribute("src", "");
+            cursorMode = () => {
+                console.log("click")
+            }
     }
 })

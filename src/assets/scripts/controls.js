@@ -16,6 +16,7 @@ var keybinds = {
         down: "S",
         left: "A",
         right: "D",
+        exit: "Escape"
     }
 };
 var mapStep = tileSize / 7;
@@ -80,6 +81,11 @@ window.addEventListener("keydown", (e) => {
             }
             updatePlayerCoords(currentCoords);
             break;
+        case keybinds.cursor.exit:
+            cursorIcon.setAttribute("src", "");
+            cursorMode = () => {
+                console.log("click");
+            };
     }
 });
 //# sourceMappingURL=controls.js.map
