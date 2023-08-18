@@ -1,20 +1,12 @@
-interface TextureCache {
-    data: Map<String, String>,
-    get: (key: string) => string,
-}
-
 fetch("/data/textureManifest.json")
     .then((res) => {return res.text()})
     .then((data) => {localStorage.setItem("textureCache", data)})
 
 class Texture {
-    data: string;
-    type: Array<string>;
+    element: HTMLElement;
     constructor(object: string) {
-        // Set data
-        this.type = object.split("."); 
-
         // Get data
-        this.data = JSON.parse(localStorage.getItem("textureCache")!)[object];
+        this.element = document.createElement("div");
+        this.element.innerHTML = JSON.parse(localStorage.getItem("textureCache")!)[object];
     }
 }

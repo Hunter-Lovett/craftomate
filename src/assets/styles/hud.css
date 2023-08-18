@@ -1,5 +1,4 @@
 #cursor {
-    background: rgba(200,200,200,0.4);
     position: absolute;
     width: 2.5vw;
     height: 2.5vw;
@@ -9,6 +8,7 @@
 }
 
 #cursor-icon {
+    background: rgba(200,200,200,0.4);
     position: absolute;
     top: 0;
     left: 0;
