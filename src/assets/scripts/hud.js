@@ -51,12 +51,14 @@ const cursorIcon = document.getElementById("cursor-icon");
 function cursorIdleMode() {
     console.log("Cursor clicked, idling");
 }
+var cursorStatus = "idle";
 var cursorMode = cursorIdleMode;
 cursor.addEventListener("click", (e) => {
     cursorMode();
 });
 buildItems.forEach((item) => {
     item.addEventListener("click", (e) => {
+        cursorStatus = "build";
         var buildItem = item.dataset.type.split(".");
         cursorIcon.setAttribute("src", `/graphics/${buildItem[0]}/${buildItem[1]}/active.svg`);
         cursorMode = () => {

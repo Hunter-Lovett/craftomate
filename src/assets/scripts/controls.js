@@ -22,7 +22,6 @@ var keybinds = {
 var mapStep = tileSize / 7;
 window.addEventListener("keydown", (e) => {
     var key = e.key.length == 1 ? e.key.toUpperCase() : e.key;
-    console.log(key, e.key);
     switch (key) {
         case keybinds.map.right:
             moveMap.right(mapStep);
@@ -82,6 +81,7 @@ window.addEventListener("keydown", (e) => {
             updatePlayerCoords(currentCoords);
             break;
         case keybinds.cursor.exit:
+            cursorStatus = "idle";
             cursorIcon.setAttribute("src", "");
             cursorMode = () => {
                 console.log("click");

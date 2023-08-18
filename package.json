@@ -4,6 +4,8 @@
   "description": "Idle factory game",
   "main": " ",
   "scripts": {
+    "compileTextures": "node ./src/graphics/graphicsCompiler.js",
+    "build": "npm run compileTextures && npx prodbuild build",
     "test": "npx prodbuild serve start"
   },
   "author": "Griffin Ferguson",

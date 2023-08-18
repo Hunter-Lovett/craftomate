@@ -1,7 +1,21 @@
+/* CONVEYOR BELT M1 */
 .building[data-type="transport.conveyor_1"][data-power="idle"] {
     background-image: url(../../graphics/transport/conveyor_1/idle.svg);
 }
 
 .building[data-type="transport.conveyor_1"][data-power="active"] {
     background-image: url(../../graphics/transport/conveyor_1/active.svg);
+}
+
+/* PTI MINER MK1 */
+.building[data-type="extraction.pitMiner_1"][data-power="idle"] {
+    background-image: url(../../graphics/extraction/pitMiner_1/idle.svg);
+    width: 448px;
+    height: 448px;
+}
+
+.building[data-type="extraction.pitMiner_1"][data-power="active"] {
+    background-image: url(../../graphics/extraction/pitMiner_1/active.svg);
+    width: 448px;
+    height: 448px;
 }

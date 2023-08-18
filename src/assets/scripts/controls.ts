@@ -86,6 +86,7 @@ window.addEventListener("keydown", (e) => {
             updatePlayerCoords(currentCoords);
             break;
         case keybinds.cursor.exit:
+            cursorStatus = "idle";
             cursorIcon.setAttribute("src", "");
             cursorMode = () => {
                 console.log("click")
