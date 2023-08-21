@@ -59,10 +59,46 @@ cursor.addEventListener("click", (e) => {
 buildItems.forEach((item) => {
     item.addEventListener("click", (e) => {
         cursorStatus = "build";
-        var buildItem = item.dataset.type.split(".");
-        cursorIcon.setAttribute("src", `/graphics/${buildItem[0]}/${buildItem[1]}/active.svg`);
+        var buildingSize = {
+            x: gameData.buildings[item.dataset.type.split(".")[0]][item.dataset.type.split(".")[1]].size[0],
+            y: gameData.buildings[item.dataset.type.split(".")[0]][item.dataset.type.split(".")[1]].size[1]
+        };
+        var offset = {
+            x: buildingSize.x > 1 ? Math.floor(buildingSize.x / 2) : 0,
+            y: buildingSize.x > 1 ? Math.floor(buildingSize.y / 2) : 0
+        };
+        cursorIcon.innerHTML = "";
+        cursorIcon.style.width = buildingSize.x * gridSize + "px";
+        cursorIcon.style.height = buildingSize.y * gridSize + "px";
+        cursorIcon.style.transform = `translate(-${offset.x * gridSize}px, -${offset.y * gridSize}px)`;
+        cursorIcon.appendChild(new Texture(item.dataset.type + ".active").element);
         cursorMode = () => {
-            new Building(buildItem[1], buildItem[0], playerCoords);
+            var itemCoords = {
+                x: {
+                    tile: playerCoords.x.tile,
+                    grid: playerCoords.x.grid - offset.x
+                }, y: {
+                    tile: playerCoords.y.tile,
+                    grid: playerCoords.y.grid - offset.y
+                }
+            };
+            if (itemCoords.x.grid < 0) {
+                itemCoords.x.tile -= 1;
+                itemCoords.x.grid += 8;
+            }
+            else if (itemCoords.x.grid > 7) {
+                itemCoords.x.tile += 1;
+                itemCoords.x.grid -= 8;
+            }
+            if (itemCoords.y.grid < 0) {
+                itemCoords.y.tile -= 1;
+                itemCoords.y.grid += 8;
+            }
+            else if (itemCoords.y.grid > 7) {
+                itemCoords.y.tile += 1;
+                itemCoords.y.grid -= 8;
+            }
+            new Building(item.dataset.type, itemCoords);
         };
     });
 });

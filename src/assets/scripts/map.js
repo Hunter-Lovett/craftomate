@@ -94,6 +94,8 @@ gameMap.addEventListener("mousemove", (e) => {
 const mapData = new Map();
 class Tile {
     constructor(x, y, env) {
+        this.grid = Array(8).fill("");
+        this.grid.map(() => { Array(8).fill(""); });
         this.element = document.createElement("div");
         this.element.setAttribute("id", `tile_${x}-${y}`);
         this.element.classList.add("tile");
@@ -105,13 +107,16 @@ class Tile {
         else {
             this.element.classList.add("factory");
         }
-        this.buildings = [];
+        this.buildings = new Map();
         gameMap.appendChild(this.element);
         this.element = document.getElementById(`tile_${x}-${y}`);
         mapData.set(`tile_${x}-${y}`, this);
     }
     addBuilding(building) {
-        this.buildings.push(building);
+        var uid = `${playerCoords.x.tile}${playerCoords.x.grid}${playerCoords.y.grid}${playerCoords.y.tile}`;
+        if (this.buildings.get(uid))
+            return;
+        this.buildings.set(uid, building);
         var coords = translateCoords(building.position);
         building.element.style.top = coords[1][1] + "px";
         building.element.style.left = coords[0][1] + "px";
@@ -120,7 +125,7 @@ class Tile {
 }
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {
-        new Tile(x, y, "grass");
+        new Tile(x, y, "factory");
     }
 }
 //# sourceMappingURL=map.js.map

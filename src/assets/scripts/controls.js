@@ -82,7 +82,10 @@ window.addEventListener("keydown", (e) => {
             break;
         case keybinds.cursor.exit:
             cursorStatus = "idle";
-            cursorIcon.setAttribute("src", "");
+            cursorIcon.innerHTML = "";
+            cursorIcon.style.width = "100%";
+            cursorIcon.style.height = "100%";
+            cursorIcon.style.transform = "translate(0%, 0%)";
             cursorMode = () => {
                 console.log("click");
             };

@@ -4,9 +4,16 @@ fetch("/data/textureManifest.json")
 
 class Texture {
     element: HTMLElement;
+    uri: string;
+    data: string;
     constructor(object: string) {
+        console.log(object);
         // Get data
-        this.element = document.createElement("div");
-        this.element.innerHTML = JSON.parse(localStorage.getItem("textureCache")!)[object];
+        this.data = JSON.parse(localStorage.getItem("textureCache")!)[object];
+        this.uri = "data:image/svg+xml;base64," + btoa(this.data);
+        // Create element
+        this.element = document.createElement("img");
+        this.element.setAttribute("src", this.uri);
+        this.element.setAttribute("draggable", "false");
     }
 }

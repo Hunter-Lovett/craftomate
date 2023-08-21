@@ -1,0 +1,87 @@
+{
+    "schema": {
+        "buildings": {
+            "category": {
+                "objectID": {
+                    "name": "common name",
+                    "speed": ["items per second (number)", "items per minute (number)"],
+                    "inputItems": ["list of resources or a resource state"],
+                    "outputItems": ["list of resources or a resource state"],
+                    "power": "power draw (number)",
+                    "size": ["x size (number)", "y size (number)"],
+                    "inputs": [
+                        {
+                            "x": "x offset of input (number)",
+                            "y": "y offset of input (number)",
+                            "rotation": "rotation of input (number)"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "x": "x offset of input (number)",
+                            "y": "y offset of input (number)",
+                            "rotation": "rotation of input (number)"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "buildings": {
+        "transport": {
+            "conveyor_1": {
+                "name": "Conveyor Belt Mk1",
+                "speed": [0.5, 30],
+                "inputItems": ["solid"],
+                "outputItems": ["solid"],
+                "power": 0.2,
+                "size": [1,1],
+                "inputs": [{
+                    "x": 1,
+                    "y": 1,
+                    "rotation": 0
+                }],
+                "outputs": [{
+                    "x": 1,
+                    "y": 1,
+                    "rotation": 0
+                }]
+                
+            }
+        },
+        "extraction": {
+            "pitMiner_1": {
+                "name": "Pit Miner Mk1",
+                "speed": [0.5, 30],
+                "inputItems": [],
+                "outputItems": ["resources.extractable"],
+                "power": 20,
+                "size": [7, 7],
+                "inputs": [],
+                "outputs": [{
+                    "x": 7,
+                    "y": 4,
+                    "rotation": 0
+                }]
+            }
+        }
+    },
+    "resources": {
+        "extractable": {
+            "ironOre": {
+                "name": "Iron Ore",
+                "state": "solid",
+                "refined": "resources.refined.ironBlock"
+            }
+        },
+        "refined": {
+            "ironBlock": {
+                "name": "Iron Block",
+                "state": "solid"
+            }
+        }
+    },
+    "products": {
+
+    }
+}

@@ -23,6 +23,11 @@
     animation-timing-function: linear;
 }
 
+#cursor-icon img {
+    width: 100%;
+    height: 100%;
+}
+
 #hud-menu {
     width: 100vw;
     background-color: rgba(0,0,0,0.8);
