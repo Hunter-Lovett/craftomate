@@ -6,7 +6,8 @@
   "scripts": {
     "compileTextures": "node ./src/graphics/graphicsCompiler.js",
     "build": "npm run compileTextures && npx prodbuild build",
-    "test": "npx prodbuild serve start"
+    "test": "npx prodbuild serve start",
+    "test:stop": "npx prodbuild serve kill --purge"
   },
   "author": "Griffin Ferguson",
   "license": "ISC",

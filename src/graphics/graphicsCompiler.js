@@ -11,7 +11,7 @@ function dirSearch(dir) {
         else if (extname(path) == ".svg") {
             // Get file data
             console.log("Processing " + path);
-            var data = fs.readFileSync(path, {encoding:"utf8"}).replace(/\n\s*/gm, "");
+            var data = fs.readFileSync(path, {encoding:"utf8"}).replace(/\n\s*\</gm, "<").replace(/\n\s*/gm, " ");
             path = path.replace(".svg", "").split(__dirname + "/")[1].split("/").join(".");
             // Store texture
             cache[path] = data;
