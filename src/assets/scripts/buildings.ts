@@ -56,6 +56,6 @@ class Building {
         this.element.style.width = gameData.buildings[type.split(".")[0]][type.split(".")[1]].size[0] * gridSize + "px";
         this.element.style.height = gameData.buildings[type.split(".")[0]][type.split(".")[1]].size[1] * gridSize + "px";
         this.element.style.backgroundImage = `url(${this.powerStatus == "active" ? this.texture.active.uri : this.texture.idle.uri})`;
-        mapData.get(`tile_${this.position.x.tile}-${this.position.y.tile}`)!.addBuilding(this);
+        addBuilding(this);
     }
 }

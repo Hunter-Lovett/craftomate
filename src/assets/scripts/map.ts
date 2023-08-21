@@ -55,23 +55,58 @@ window.addEventListener("mouseup", (e) => {
 })
 
 // Coordinates
-interface Coordinate {
-    x: {
-        tile: number,
-        grid: number
-    },
-    y: {
-        tile: number,
-        grid: number
+interface AxisCoordinate {
+    tile: number,
+    grid: number
+}
+
+class Coordinate {
+    x: AxisCoordinate;
+    y: AxisCoordinate;
+    constructor(x: AxisCoordinate, y: AxisCoordinate) {
+        // Overload adjustment
+        if (x.grid < 0) {
+            x.tile -= 1;
+            x.grid += 8;
+        } else if (x.grid > 7) {
+            x.tile += 1;
+            x.grid -= 8;
+        }
+        if (y.grid < 0) {
+            y.tile -= 1;
+            y.grid += 8;
+        } else if (y.grid > 7) {
+            y.tile += 1;
+            y.grid -= 8;
+        }
+        
+        // Save values
+        this.x = x;
+        this.y = y;
     }
 }
 
-var playerCoords: Coordinate;
+// Convert from proprietary coordinate to pixel values
+function translateCoords(coords: Coordinate): Array<Array<number>> {
+    return [
+        [ // X
+            (coords.x.tile * tileSize), // Location of tile on map in pixels
+            (coords.x.grid * (tileSize / 8)) // Location within the tile
+        ], [ // Y
+            (coords.y.tile * tileSize), // Location of tile on map in pixels
+            (coords.y.grid * (tileSize / 8)) // Location within the tile
+        ]
+    ]
+}
+
+// Get cursor, meta data, and coordinate display
 const hudCoords = document.getElementById("hud_coordinates")!;
 var tileSize = gameMap.offsetWidth / 15;
 var gridSize = tileSize / 8;
 const cursor = document.getElementById("cursor")!;
 
+// Stuff for player coordinates
+var playerCoords: Coordinate;
 function updatePlayerCoords(coords: Coordinate) {
     playerCoords = coords;
     // Update HUD
@@ -80,18 +115,6 @@ function updatePlayerCoords(coords: Coordinate) {
     var cursorCoords = translateCoords(playerCoords);
     cursor.style.top = `${cursorCoords[1][0] + cursorCoords[1][1]}px`;
     cursor.style.left = `${cursorCoords[0][0] + cursorCoords[0][1]}px`;
-}
-
-function translateCoords(coords: Coordinate): Array<Array<number>> {
-    return [
-        [ // X
-            (coords.x.tile * tileSize), // Tile
-            (coords.x.grid * (tileSize / 8)) // Grid
-        ], [ // Y
-            (coords.y.tile * tileSize), // Tile
-            (coords.y.grid * (tileSize / 8)) // Grid
-        ]
-    ]
 }
 
 gameMap.addEventListener("mousemove", (e) => {
@@ -119,11 +142,15 @@ const mapData: Map<String, Tile> = new Map();
 class Tile {
     element: HTMLElement;
     buildings: Map<String, Building>;
-    grid: Array<Array<String>>;
-    constructor(x: number, y: number, env: String) {
+    grid: Array<Array<String>> = [];
+    constructor(x: number, y: number, env: string) {
         // Empty grid
-        this.grid = Array(8).fill("");
-        this.grid.map(() => {Array(8).fill("")});
+        for (var arrX = 0; arrX < 8; arrX++) {
+            this.grid.push([]);
+            for (var arrY = 0; arrY < 8; arrY++) {
+                this.grid[arrX].push("");
+            }
+        }
         // Create element
         this.element = document.createElement("div");
         this.element.setAttribute("id", `tile_${x}-${y}`);
@@ -143,24 +170,56 @@ class Tile {
         this.element = document.getElementById(`tile_${x}-${y}`)!;
         mapData.set(`tile_${x}-${y}`, this);
     }
-
-    addBuilding(building: Building) {
-        var uid = `${playerCoords.x.tile}${playerCoords.x.grid}${playerCoords.y.grid}${playerCoords.y.tile}`;
-        // Check for existing building
-        if (this.buildings.get(uid)) return;
-        // Create building
-        this.buildings.set(uid, building);
-        // Add building to map
-        var coords = translateCoords(building.position);
-        building.element.style.top = coords[1][1] + "px";
-        building.element.style.left = coords[0][1] + "px";
-        this.element.appendChild(building.element);
-    }
 }
-
 
 for (var y = 0; y < 15; y++) {
     for (var x = 0; x < 15; x++) {
         new Tile(x, y, "factory");
     }
+}
+
+// Add building to a tile
+function addBuilding(building: Building) {
+    var dataTile = mapData.get(`tile_${building.position.x.tile}-${building.position.y.tile}`)!;
+    var uid = `${playerCoords.x.tile}:${playerCoords.x.grid}|${playerCoords.y.grid}:${playerCoords.y.tile}`;
+    // Check for existing building
+    var buildingSize = {
+        x: gameData.buildings[building.type.split(".")[0]][building.type.split(".")[1]].size[0],
+        y: gameData.buildings[building.type.split(".")[0]][building.type.split(".")[1]].size[1]
+    }
+    var checkCoords: Coordinate;
+    var checkTile: Tile = dataTile;
+    // Loop to check every grid occupied by the building footprint
+    for (var y = 0; y < buildingSize.y; y++) {
+        for (var x = 0; x < buildingSize.x; x++) {
+            // Get coordinates to check
+            checkCoords = new Coordinate({
+                tile: building.position.x.tile,
+                grid: building.position.x.grid + x
+            }, {
+                tile: building.position.y.tile,
+                grid: building.position.y.grid + y
+            })
+            // Get the tile to check
+            if (building.position.x.grid + x > 7 || building.position.y.grid + y > 7) checkTile = mapData.get(`tile_${checkCoords.x.tile}-${checkCoords.y.tile}`)!;
+            // Check the grid of the check tile
+            console.log(checkCoords, checkTile.grid[checkCoords.x.grid][checkCoords.y.grid])
+            if (checkTile.grid[checkCoords.x.grid][checkCoords.y.grid] == "") checkTile.grid[checkCoords.x.grid][checkCoords.y.grid] = uid;
+            else {
+                console.log("obstructed")
+                cursorIcon.classList.add("cursorError");
+                setTimeout(() => {
+                    cursorIcon.classList.remove("cursorError");
+                }, 1500)
+                return;
+            }
+        }
+    }
+    // Create building
+    dataTile.buildings.set(uid, building);
+    // Add building to map
+    var coords = translateCoords(building.position);
+    building.element.style.top = coords[1][1] + "px";
+    building.element.style.left = coords[0][1] + "px";
+    dataTile.element.appendChild(building.element);
 }

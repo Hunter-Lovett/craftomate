@@ -83,33 +83,14 @@ buildItems.forEach((item) => {
         cursorIcon.style.transform = `translate(-${offset.x * gridSize}px, -${offset.y * gridSize}px)`;
         cursorIcon.appendChild(new Texture(item.dataset.type! + ".active").element);
         cursorMode = () => {
-            var itemCoords = {
-                x: {
+            new Building(item.dataset.type!, new Coordinate({
                     tile: playerCoords.x.tile,
                     grid: playerCoords.x.grid - offset.x
-                }, y: {
+                }, {
                     tile: playerCoords.y.tile,
                     grid: playerCoords.y.grid - offset.y
-                }
-            }
-
-            // Adjust x & y values
-            if (itemCoords.x.grid < 0) {
-                itemCoords.x.tile -= 1;
-                itemCoords.x.grid += 8;
-            } else if (itemCoords.x.grid > 7) {
-                itemCoords.x.tile += 1;
-                itemCoords.x.grid -= 8;
-            }
-            if (itemCoords.y.grid < 0) {
-                itemCoords.y.tile -= 1;
-                itemCoords.y.grid += 8;
-            } else if (itemCoords.y.grid > 7) {
-                itemCoords.y.tile += 1;
-                itemCoords.y.grid -= 8;
-            }
-
-            new Building(item.dataset.type!, itemCoords)
+                })
+            )
         }
     })
 })
