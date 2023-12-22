@@ -1,0 +1,16 @@
+{
+    "size": [448, 448],
+    "idle": [
+        {
+            "load": "buildings.extraction.pitMiner_1.base",
+            "props": []
+        }, {
+            "load": "buildings.extraction.pitMiner_1.arm",
+            "props": []
+        }, {
+            "load": "buildings.transport.conveyor_1.idle",
+            "props": []
+        }
+        
+    ]
+}

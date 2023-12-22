@@ -2,5 +2,5 @@
 	"entry": "src/",
 	"output": "dist/",
 	"port": 5000,
-	"exclude": ["graphics/"]
+	"exclude": []
 }

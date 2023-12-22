@@ -37,11 +37,13 @@ class Building {
     powerStatus: string;
     type: string;
     texture: BuildingTextureList;
+    inventory: Map<String, number>;
     constructor(type: string, position: Coordinate) {
         // Meta data
         this.position = position;
         this.powerStatus = "idle";
         this.type = type;
+        this.inventory = new Map();
         // Load textures
         this.texture = {
             idle: new Texture(`${type}.idle`),
@@ -59,3 +61,5 @@ class Building {
         addBuilding(this);
     }
 }
+
+

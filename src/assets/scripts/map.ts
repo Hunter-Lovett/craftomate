@@ -178,11 +178,14 @@ for (var y = 0; y < 15; y++) {
     }
 }
 
+
+
 // Add building to a tile
 function addBuilding(building: Building) {
     var dataTile = mapData.get(`tile_${building.position.x.tile}-${building.position.y.tile}`)!;
     var uid = `${playerCoords.x.tile}:${playerCoords.x.grid}|${playerCoords.y.grid}:${playerCoords.y.tile}`;
     // Check for existing building
+
     var buildingSize = {
         x: gameData.buildings[building.type.split(".")[0]][building.type.split(".")[1]].size[0],
         y: gameData.buildings[building.type.split(".")[0]][building.type.split(".")[1]].size[1]

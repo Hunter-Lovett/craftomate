@@ -89,6 +89,7 @@ window.addEventListener("keydown", (e) => {
             cursorMode = () => {
                 console.log("click");
             };
+            break;
     }
 });
 //# sourceMappingURL=controls.js.map
